@@ -18,7 +18,7 @@ const Book = db.define('books', {
     type: Sequelize.DOUBLE,
     allowNull: false,
   }
-}, { timestamps: true })
+}, { timestamps: true, underscored: true })
 
 Book.belongsTo(Client, { foreignKey: 'clientId' })
 Book.belongsTo(Book, { foreignKey: 'bookId' })
