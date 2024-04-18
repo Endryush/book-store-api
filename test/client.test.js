@@ -1,21 +1,22 @@
 import request from 'supertest';
 import app from '../src/server'
-// TO DO: Implement logic that create and manipulate the same user, and then delete it.
+
 const validPayload = {
   name: "clientNAme",
   email: "email@email.com",
   phone: "454545",
   password: "senhaforte",
-  address: "rua xcv, 0 - lalala"
+  address: "rua xcv, 0 - lalala",
+  id: 0
 }
 
 const getByIdResponse = {
-  id: 1,
-  name: "Andre da silva",
-  email: "andre@email.com",
-  password: "senhaultraforte",
-  phone: "848456569",
-  address: "rua xcv, 0 - lalala"
+  name: "clientNAme",
+  email: "email@email.com",
+  phone: "454545",
+  password: "senhaforte",
+  address: "rua xcv, 0 - lalala",
+  id: 0
 }
 
 describe('Testing API POST on /client', () => {
@@ -37,37 +38,41 @@ describe('Testing API POST on /client', () => {
 })
 
 describe ('Testing  PUT /client', () => {
+  test('Valid Client', async () => {
+    const payload = {
+      ...validPayload
+    }
+    payload.id = '0'
+    const response = await request(app)
+      .put('/api/client')
+      .send(payload)
+
+    expect(response.status).toBe(200)
+  })
+
   test('NotFoundClient', async () => {
+    const payload = {
+      ...validPayload
+    }
+    payload.id = 8797897897987
     const response = await request(app)
       .put( '/api/client')
-      .send({
-        ...validPayload,
-        id: 8797897897987
-      })
+      .send(payload)
 
     expect(response.status).toBe(404)
     expect(response.body.error).toBe("Client not Found")
   })
 
   test('With No Id Informed', async () => {
+    const payload = { ...validPayload }
+    delete payload.id
+
     const response = await request(app)
       .put('/api/client')
       .send(validPayload)
     
       expect(response.status).toBe(400)
       expect(response.body.error).toBe("Client ID is required")
-  })
-
-  test('Valid Client', async () => {
-    const updatedPayload = {
-      ...validPayload,
-      id: 2
-    }
-    const response = await request(app)
-      .put('/api/client')
-      .send(updatedPayload)
-
-    expect(response.status).toBe(200)
   })
 })
 
@@ -83,7 +88,7 @@ describe('Testing API GET on /client', () => {
 
   test('Valid client', async () => {
     const response = await request(app)
-      .get('/api/client/1')
+      .get('/api/client/0')
       .send()
 
     expect(response.status).toBe(200)
@@ -108,4 +113,12 @@ describe('Testing API DELETE on /client', () => {
 
     expect(response.status).toBe(404)
   });
+
+  test('Deleting TEST user on /client', async () => {
+    const response = await request(app)
+    .delete('/api/client/0')
+    .send()
+
+   expect(response.status).toBe(204)
+  })
 })

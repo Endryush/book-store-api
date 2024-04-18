@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --verbose --coverage",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --watch"
