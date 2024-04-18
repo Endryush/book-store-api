@@ -24,4 +24,7 @@ jobs:
     - run: npm install --save-dev sequelize-cli
     - run: npm ci --if-present
     - run: npm run build --if-present
+    - name: Run tests
+      env:
+        DB_URL: ${{ secrets.DB_URL }}
     - run: npm test
