@@ -1,0 +1,11 @@
+version: '3'
+services:
+  nodejs:
+    image: node_book_store_api
+    restart: always
+    build: .
+    ports:
+      - "5600:5600"
+    environment:
+      - DB_URL=${DB_URL}
+      - DB_MONGO=${DB_MONGO}
