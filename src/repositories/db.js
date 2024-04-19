@@ -7,7 +7,8 @@ const dbUrl = process.env.DB_URL
 const sequelize = new Sequelize(
   dbUrl,
   {
-    dialect: 'postgres'
+    dialect: 'postgres',
+    logging: false
   }
 )
 
