@@ -110,7 +110,7 @@ describe('Testing API DELETE on /author', () => {
     expect(response.status).toBe(404)
   });
 
-  test('Deleting TEST user on /author', async () => {
+  test('Deleting TEST author on /author', async () => {
     const response = await request(app)
     .delete('/api/author/0')
     .send()

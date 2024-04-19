@@ -3,7 +3,7 @@ import db from '../repositories/db.js'
 import Client from './client.model.js'
 import Book from './book.model.js'
 
-const Book = db.define('books', {
+const Sale = db.define('sale', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -20,7 +20,7 @@ const Book = db.define('books', {
   }
 }, { timestamps: true, underscored: true })
 
-Book.belongsTo(Client, { foreignKey: 'clientId' })
-Book.belongsTo(Book, { foreignKey: 'bookId' })
+Sale.belongsTo(Client, { foreignKey: 'clientId' })
+Sale.belongsTo(Book, { foreignKey: 'bookId' })
 
-export default Book
+export default Sale

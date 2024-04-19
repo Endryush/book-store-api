@@ -1,36 +1,37 @@
 import request from 'supertest';
 import app from '../src/server'
+const date = new Date().toISOString()
 
 const validPayload = {
-  name: "bookNAme",
+  date: date,
   value: 40.5,
-  stock: 12,
+  clientId: 2,
   id: 0,
-  authorId: 2
+  bookId: 2
 }
 
 const getByIdResponse = {
-  name: "bookNAme",
+  date: date,
   value: 40.5,
-  stock: 12,
+  clientId: 2,
   id: 0,
-  authorId: 2
+  bookId: 2
 }
 
-describe('Testing API POST on /book', () => {
+describe('Testing API POST on /sale', () => {
   test('invalid Payload', async () => {
     const response = await request(app)
-      .post('/api/book')
+      .post('/api/sale')
       .send({})
 
       expect(response.status).toBe(400)
   })
 
-  test('Without authorID POST on  /book', async () => {
+  test('Without clientId POST on  /sale', async () => {
     const payload = {...validPayload}
-    delete payload.authorId
+    delete payload.clientId
     const response = await request(app)
-      .post('/api/book')
+      .post('/api/sale')
       .send(payload)
 
       expect(response.status).toBe(400)
@@ -39,37 +40,37 @@ describe('Testing API POST on /book', () => {
 
   test ('validPayload', async () => {
     const response = await request(app)
-      .post('/api/book')
+      .post('/api/sale')
       .send(validPayload)
 
     expect(response.status).toBe(201)
   })
 })
 
-describe ('Testing  PUT /book', () => {
-  test('Valid Book', async () => {
+describe ('Testing  PUT /sale', () => {
+  test('Valid Sale', async () => {
     const payload = {
       ...validPayload
     }
     payload.id = '0'
     const response = await request(app)
-      .put('/api/book')
+      .put('/api/sale')
       .send(payload)
 
     expect(response.status).toBe(200)
   })
 
-  test('NotFoundBook', async () => {
+  test('NotFoundSale', async () => {
     const payload = {
       ...validPayload
     }
     payload.id = -1
     const response = await request(app)
-      .put( '/api/book')
+      .put( '/api/sale')
       .send(payload)
 
     expect(response.status).toBe(404)
-    expect(response.body.error).toBe("Book not Found")
+    expect(response.body.error).toBe("Sale not Found")
   })
 
   test('With No Id Informed', async () => {
@@ -77,18 +78,18 @@ describe ('Testing  PUT /book', () => {
     delete payload.id
 
     const response = await request(app)
-      .put('/api/book')
+      .put('/api/sale')
       .send(validPayload)
     
       expect(response.status).toBe(400)
-      expect(response.body.error).toBe("Book ID is required")
+      expect(response.body.error).toBe("Sale ID is required")
   })
 
-  test('Without authorID PUT on  /book', async () => {
+  test('Without clientId PUT on  /sale', async () => {
     const payload = {...validPayload}
-    delete payload.authorId
+    delete payload.clientId
     const response = await request(app)
-      .post('/api/book')
+      .post('/api/sale')
       .send(payload)
 
       expect(response.status).toBe(400)
@@ -96,28 +97,28 @@ describe ('Testing  PUT /book', () => {
   })
 })
 
-describe('Testing API GET on /book', () => {
-  test('Not Found Book', async () => {
+describe('Testing API GET on /sale', () => {
+  test('Not Found Sale', async () => {
     const response = await request(app)
-      .get('/api/book/-1')
+      .get('/api/sale/-1')
       .send()
     
     expect(response.status).toBe(404)
-    expect(response.body.error).toBe("Book not found")
+    expect(response.body.error).toBe("Sale not found")
   })
 
-  test('Valid book', async () => {
+  test('Valid sale', async () => {
     const response = await request(app)
-      .get('/api/book/0')
+      .get('/api/sale/0')
       .send()
 
     expect(response.status).toBe(200)
     expect(response.body).toMatchObject(getByIdResponse)
   })
 
-  test('Get All Books', async () => {
+  test('Get All Sales', async () => {
     const response = await request(app)
-      .get('/api/book')
+      .get('/api/sale')
       .send()
 
     expect(response.status).toBe(200)
@@ -125,18 +126,18 @@ describe('Testing API GET on /book', () => {
   })
 })
 
-describe('Testing API DELETE on /book', () => {
-  test('Deleting  a non-existing book', async () => {
+describe('Testing API DELETE on /sale', () => {
+  test('Deleting  a non-existing sale', async () => {
     const response = await request(app)
-      .delete('/api/book/98765')
+      .delete('/api/sale/98765')
       .send()
 
     expect(response.status).toBe(404)
   });
 
-  test('Deleting TEST book on /book', async () => {
+  test('Deleting TEST sale on /sale', async () => {
     const response = await request(app)
-    .delete('/api/book/0')
+    .delete('/api/sale/0')
     .send()
 
    expect(response.status).toBe(204)
