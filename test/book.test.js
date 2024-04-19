@@ -2,27 +2,25 @@ import request from 'supertest';
 import app from '../src/server'
 
 const validPayload = {
-  name: "clientNAme",
-  email: "email@email.com",
-  phone: "454545",
-  password: "senhaforte",
-  address: "rua xcv, 0 - lalala",
-  id: 0
+  name: "bookNAme",
+  value: 40.5,
+  stock: 12,
+  id: 0,
+  authorId: 2
 }
 
 const getByIdResponse = {
-  name: "clientNAme",
-  email: "email@email.com",
-  phone: "454545",
-  password: "senhaforte",
-  address: "rua xcv, 0 - lalala",
-  id: 0
+  name: "bookNAme",
+  value: 40.5,
+  stock: 12,
+  id: 0,
+  authorId: 2
 }
 
-describe('Testing API POST on /client', () => {
+describe('Testing API POST on /book', () => {
   test('invalid Payload', async () => {
     const response = await request(app)
-      .post('/api/client')
+      .post('/api/book')
       .send({})
 
       expect(response.status).toBe(400)
@@ -30,37 +28,37 @@ describe('Testing API POST on /client', () => {
 
   test ('validPayload', async () => {
     const response = await request(app)
-      .post('/api/client')
+      .post('/api/book')
       .send(validPayload)
 
     expect(response.status).toBe(201)
   })
 })
 
-describe ('Testing  PUT /client', () => {
-  test('Valid Client', async () => {
+describe ('Testing  PUT /book', () => {
+  test('Valid Book', async () => {
     const payload = {
       ...validPayload
     }
     payload.id = '0'
     const response = await request(app)
-      .put('/api/client')
+      .put('/api/book')
       .send(payload)
 
     expect(response.status).toBe(200)
   })
 
-  test('NotFoundClient', async () => {
+  test('NotFoundBook', async () => {
     const payload = {
       ...validPayload
     }
     payload.id = -1
     const response = await request(app)
-      .put( '/api/client')
+      .put( '/api/book')
       .send(payload)
 
     expect(response.status).toBe(404)
-    expect(response.body.error).toBe("Client not Found")
+    expect(response.body.error).toBe("Book not Found")
   })
 
   test('With No Id Informed', async () => {
@@ -68,36 +66,36 @@ describe ('Testing  PUT /client', () => {
     delete payload.id
 
     const response = await request(app)
-      .put('/api/client')
+      .put('/api/book')
       .send(validPayload)
     
       expect(response.status).toBe(400)
-      expect(response.body.error).toBe("Client ID is required")
+      expect(response.body.error).toBe("Book ID is required")
   })
 })
 
-describe('Testing API GET on /client', () => {
-  test('Not Found Client', async () => {
+describe('Testing API GET on /book', () => {
+  test('Not Found Book', async () => {
     const response = await request(app)
-      .get('/api/client/-1')
+      .get('/api/book/-1')
       .send()
     
     expect(response.status).toBe(404)
-    expect(response.body.error).toBe("Client not found")
+    expect(response.body.error).toBe("Book not found")
   })
 
-  test('Valid client', async () => {
+  test('Valid book', async () => {
     const response = await request(app)
-      .get('/api/client/0')
+      .get('/api/book/0')
       .send()
 
     expect(response.status).toBe(200)
     expect(response.body).toMatchObject(getByIdResponse)
   })
 
-  test('Get All Clients', async () => {
+  test('Get All Books', async () => {
     const response = await request(app)
-      .get('/api/client')
+      .get('/api/book')
       .send()
 
     expect(response.status).toBe(200)
@@ -105,18 +103,18 @@ describe('Testing API GET on /client', () => {
   })
 })
 
-describe('Testing API DELETE on /client', () => {
-  test('Deleting  a non-existing client', async () => {
+describe('Testing API DELETE on /book', () => {
+  test('Deleting  a non-existing book', async () => {
     const response = await request(app)
-      .delete('/api/client/98765')
+      .delete('/api/book/98765')
       .send()
 
     expect(response.status).toBe(404)
   });
 
-  test('Deleting TEST user on /client', async () => {
+  test('Deleting TEST user on /book', async () => {
     const response = await request(app)
-    .delete('/api/client/0')
+    .delete('/api/book/0')
     .send()
 
    expect(response.status).toBe(204)

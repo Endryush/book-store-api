@@ -50,7 +50,7 @@ describe ('Testing  PUT /author', () => {
     const payload = {
       ...validPayload
     }
-    payload.id = 8797897897987
+    payload.id = -1
     const response = await request(app)
       .put( '/api/author')
       .send(payload)
@@ -75,7 +75,7 @@ describe ('Testing  PUT /author', () => {
 describe('Testing API GET on /author', () => {
   test('Not Found Author', async () => {
     const response = await request(app)
-      .get('/api/author/15634')
+      .get('/api/author/-1')
       .send()
     
     expect(response.status).toBe(404)

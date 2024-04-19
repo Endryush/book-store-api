@@ -1,9 +1,6 @@
-export function validateAuthor(client) {
-  const requiredFields = ['name', 'email', 'phone']
-  const missingFields = requiredFields.filter(field => !client[field]);
-  const message =  missingFields.length === 1 ?  
-    `The ${ missingFields[0]} field is required` :
-    `The fields ${missingFields.join(', ')} are requried`
+import validateFieldsDefault from "./validateFieldsDefault.js"
 
-  if (missingFields.length > 0) throw new Error(message);
+export function validateAuthor(author) {
+  const requiredFields = ['name', 'email', 'phone']
+  validateFieldsDefault(requiredFields, author)
 }
