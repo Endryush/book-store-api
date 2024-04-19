@@ -1,4 +1,4 @@
-import { validateClient } from "../../helpers/validateClient.js"
+import { validateClient } from "../helpers/validateClient.js"
 import clientService from "../services/client.service.js"
 import NotFoundException from "../exceptions/NotFoundException.js";
 

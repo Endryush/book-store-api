@@ -1,4 +1,4 @@
-import { validateAuthor } from "../../helpers/validateAuthor.js"
+import { validateAuthor } from "../helpers/validateAuthor.js"
 import authorService from "../services/author.service.js"
 import NotFoundException from "../exceptions/NotFoundException.js";
 
