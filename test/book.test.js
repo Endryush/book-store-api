@@ -26,6 +26,17 @@ describe('Testing API POST on /book', () => {
       expect(response.status).toBe(400)
   })
 
+  test('Without authorID POST on  /book', async () => {
+    const payload = {...validPayload}
+    delete payload.authorId
+    const response = await request(app)
+      .post('/api/book')
+      .send(payload)
+
+      expect(response.status).toBe(400)
+      expect(response.body.error).not.toBeUndefined()
+  })
+
   test ('validPayload', async () => {
     const response = await request(app)
       .post('/api/book')
@@ -71,6 +82,17 @@ describe ('Testing  PUT /book', () => {
     
       expect(response.status).toBe(400)
       expect(response.body.error).toBe("Book ID is required")
+  })
+
+  test('Without authorID PUT on  /book', async () => {
+    const payload = {...validPayload}
+    delete payload.authorId
+    const response = await request(app)
+      .post('/api/book')
+      .send(payload)
+
+      expect(response.status).toBe(400)
+      expect(response.body.error).not.toBeUndefined()
   })
 })
 
