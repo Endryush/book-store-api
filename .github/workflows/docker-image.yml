@@ -27,4 +27,5 @@ jobs:
     - name: Run tests
       env:
         DB_URL: ${{ secrets.DB_URL }}
+        DB_MONGO: ${{ secrets.DB_MONGO }}
       run: npm test
