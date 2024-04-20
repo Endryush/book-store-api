@@ -9,4 +9,8 @@ async function connect () {
   })
 }
 
-export { connect }
+async function close () {
+  return await mongoose.connection.close()
+}
+
+export { connect, close }

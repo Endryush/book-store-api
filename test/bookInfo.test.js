@@ -14,8 +14,8 @@ const validResponse = {...validPayload}
 describe('Testing APi POST on /book/info', () => {
   test('Must return error 400 on trying to POST an invalid info', async () => {
     const response = await request(app)
-    .post('/api/book/info')
-    .send({bookId: -1})
+      .post('/api/book/info')
+      .send({bookId: -1})
 
     expect(response.status).toBe(400)
   })

@@ -1,4 +1,4 @@
-import { connect } from "../config/mongo.db.js";
+import { connect, close } from "../config/mongo.db.js";
 import BookInfoSchema from "../schema/bookInfo.schema.js";
  
 async function createBookInfo (bookInfo) {
@@ -11,7 +11,9 @@ async function createBookInfo (bookInfo) {
     return 
   } catch (error) {
     throw error
-  } 
+  }  finally {
+    await close()
+  }
 }
 
 async function updateBookInfo (bookInfo) {
@@ -21,6 +23,8 @@ async function updateBookInfo (bookInfo) {
     return await BookInfo.findOneAndUpdate({ bookId: bookInfo.bookId}, bookInfo)
   } catch (error) {
     throw error
+  } finally {
+    await close()
   }
 }
 
@@ -32,6 +36,8 @@ async function getBookInfo (bookId) {
     return await BookInfo.findOne({ bookId }).exec()
   } catch (error) {
     throw error
+  } finally {
+    await close()
   }
 }
 
@@ -42,6 +48,8 @@ async function getAllBookInfo () {
     return await BookInfo.find().exec()
   } catch (error) {
     throw error
+  } finally {
+    await close()
   }
 }
 
@@ -52,6 +60,8 @@ async function createReview (review, bookId) {
     return await updateBookInfo(bookInfo)
   } catch (error) {
     throw error
+  } finally {
+    await close()
   }
 }
 
@@ -63,6 +73,8 @@ async function deleteReview (bookId, id) {
     return await updateBookInfo(bookInfo)
   } catch (error) {
     throw error
+  } finally {
+    await close()
   }
 }
 
@@ -71,9 +83,11 @@ async function deleteBookInfo (bookId) {
     const mongoose = await connect()
     const BookInfo = mongoose.model('BookInfo', BookInfoSchema);
 
-    return BookInfo.deleteOne({ bookId }).exec()
+    return await BookInfo.deleteOne({ bookId }).exec()
   } catch (error) {
     throw error
+  } finally {
+    await close()
   }
 }
 
