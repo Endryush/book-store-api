@@ -9,7 +9,9 @@ const validPayload = {
   author: "Mrs. Little Little"
 }
 
-const validResponse = {...validPayload}
+const validResponse = {
+ ...validPayload,
+}
 
 describe('Testing APi POST on /book/info', () => {
   test('Must return error 400 on trying to POST an invalid info', async () => {
@@ -28,6 +30,34 @@ describe('Testing APi POST on /book/info', () => {
   })
 })
 
+describe('Testing API PUT on /book/info', () => {
+  test('Must return error 400 on trying to PUT an invalid info', async () => {
+    const response = await request(app)
+      .put('/api/book/info')
+      .send({bookId: -1})
+
+    expect(response.status).toBe(400)
+  })
+  test('Should return an updated book with status code 200 on sending a valid payload', async () => {
+    const response = await request(app)
+      .put('/api/book/info')
+      .send(validPayload)
+  
+    expect(response.status).toBe(200)
+    expect(response.body).toMatchSnapshot(validResponse)
+  })
+  test('Should return error 404 for invalid bookId', async () => {
+    const invalidPayload = {...validPayload}
+    invalidPayload.bookId = -1
+    const response = await request(app)
+      .put('/api/book/info')
+      .send(invalidPayload)
+
+    expect(response.status).toBe(404)
+    expect(response.body.error).toBeTruthy()
+  })
+})
+
 describe('GET BOOKINFO on book/info', () => {
   test('GET ALL BOOKINFO on book/info/all', async () => {
     const response = await request(app)
@@ -36,6 +66,24 @@ describe('GET BOOKINFO on book/info', () => {
 
     expect(response.status).toBe(200)
     expect(Array.isArray(response.body)).toBeTruthy()
+  })
+
+  test('GET BOOKINFO by ID on book/info/:id', async () => {
+    const response = await request(app)
+      .get('/api/book/info/2')
+      .send()
+
+    expect(response.status).toBe(200)
+    expect(response.body).toMatchSnapshot(validResponse)
+  })
+
+  test('GET BOOKINFO by an invalid ID on book/info/:id', async () => {
+    const response = await request(app)
+      .get('/api/book/info/-1')
+      .send()
+
+    expect(response.status).toBe(404)
+    expect(response.body.error).toBeTruthy()
   })
 })
 

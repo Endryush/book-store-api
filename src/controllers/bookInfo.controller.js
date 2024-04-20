@@ -15,13 +15,36 @@ async function createBookInfo (req, res, next) {
  }
 }
 
-async function getAllBooks (req, res, next) {
-try {
-  res.status(200).send(await bookInfoService.getAllBooks())
-  logger.info('GET All BookInfo in /book/info')
-} catch (error) {
-  next(error)
+async function updateBookInfo (req, res, next) {
+  try {
+    const bookInfo = req.body
+    validateBookInfo(bookInfo)
+    await bookInfoService.updateBookInfo(bookInfo)
+
+    res.status(200).send(bookInfo)
+    logger.info(`PUT /book/info ${bookInfo}`)
+  } catch (error) {
+    next(error)
+  }
 }
+
+async function getAllBooks (req, res, next) {
+  try {
+    res.status(200).send(await bookInfoService.getAllBooks())
+    logger.info('GET All BookInfo in /book/info')
+  } catch (error) {
+    next(error)
+  }
+}
+
+async function getBookInfo (req, res, next) {
+  try {
+    const { id }  = req.params
+
+    res.status(200).send(await bookInfoService.getBookInfo(id))
+  } catch (error) {
+    next(error)
+  }
 }
 
 async function deleteBookInfo (req, res, next) {
@@ -41,5 +64,7 @@ async function deleteBookInfo (req, res, next) {
 export default {
   createBookInfo,
   deleteBookInfo,
-  getAllBooks
+  getAllBooks,
+  updateBookInfo,
+  getBookInfo
 }

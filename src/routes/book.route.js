@@ -8,9 +8,11 @@ router
   .post('/', bookController.createBook)
   .post('/info', bookInfoController.createBookInfo)
   .put('/', bookController.updateBook)
+  .put('/info', bookInfoController.updateBookInfo)
   .get('/', bookController.getAllBooks)
   .get('/:id', bookController.getBook)
   .get('/info/all', bookInfoController.getAllBooks)
+  .get('/info/:id', bookInfoController.getBookInfo)
   .delete('/:id', bookController.deleteBook)
   .delete('/info/:id', bookInfoController.deleteBookInfo)
 

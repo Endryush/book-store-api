@@ -33,7 +33,7 @@ async function getBookInfo (bookId) {
     const mongoose = await connect()
     const BookInfo = mongoose.model('BookInfo', BookInfoSchema);
 
-    return await BookInfo.findOne({ bookId }).exec()
+    return await BookInfo.findOne({ bookId }).select('-_id -__v').lean().exec()
   } catch (error) {
     throw error
   } finally {
@@ -45,7 +45,7 @@ async function getAllBookInfo () {
   try {
     const mongoose = await connect()
     const BookInfo = mongoose.model('BookInfo', BookInfoSchema);
-    return await BookInfo.find().exec()
+    return await BookInfo.find().select('-_id -__v').lean().exec()
   } catch (error) {
     throw error
   } finally {

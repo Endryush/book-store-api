@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET BOOKINFO on book/info GET BOOKINFO by ID on book/info/:id 1`] = `
+{
+  "author": "Mrs. Little Little",
+  "bookId": 2,
+  "category": "Horror",
+  "description": "Livro de horror medo",
+  "pages": 32,
+  "reviews": [],
+}
+`;
+
+exports[`Testing API PUT on /book/info Should return an updated book with status code 200 on sending a valid payload 1`] = `
+{
+  "author": "Mrs. Little Little",
+  "bookId": 2,
+  "category": "Horror",
+  "description": "Livro de horror medo",
+  "pages": 32,
+}
+`;
