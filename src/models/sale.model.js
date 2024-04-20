@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import db from '../repositories/db.js'
+import db from '../config/db.js'
 import Client from './client.model.js'
 import Book from './book.model.js'
 import Author from './author.model.js'
