@@ -26,7 +26,7 @@ async function getAllSales(params) {
 async function getSalesByParams(params) {
   const [paramName, paramValue] = Object.entries(params)[0]
 
-  if (['authorId', 'bookId', 'clientId'].includes(paramName)) {
+  if (['bookId', 'clientId'].includes(paramName)) {
     const sales = await saleRepository.getAllSalesByParams(paramName, paramValue)
     if (sales.length === 0) throw new NotFoundException(`No sales found with ${paramName}=${paramValue}`);
 
