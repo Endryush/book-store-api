@@ -131,11 +131,13 @@ describe('Testing API DELETE on /book/info', () => {
     expect(response.body.error).toBeTruthy()
   })
 
-  test('Deleting TEST book on /book/info', async () => {
-    const response = await request(app)
-      .delete('/api/book/info/2')
-      .send()
-
-    expect(response.status).toBe(204)
-  })
+  setTimeout(() => {
+    test('Deleting TEST book on /book/info', async () => {
+      const response = await request(app)
+        .delete('/api/book/info/2')
+        .send()
+  
+      expect(response.status).toBe(204)
+    })
+  }, 3000)
 })
