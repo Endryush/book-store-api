@@ -11,5 +11,6 @@ router
   .get('/', bookController.getAllBooks)
   .get('/:id', bookController.getBook)
   .delete('/:id', bookController.deleteBook)
+  .delete('/info/:id', bookInfoController.deleteBookInfo)
 
 export default router

@@ -15,6 +15,21 @@ async function createBookInfo (req, res, next) {
  }
 }
 
+async function deleteBookInfo (req, res, next) {
+  try {
+    const bookId = parseInt(req.params.id)
+
+    if (!bookId) throw new Error('Invalid Book Id')
+    await bookInfoService.deleteBookInfo(bookId)
+
+    res.status(204).send()
+    logger.warn(`DELETE BOOKINFO BY ID: ${bookId}`)
+  } catch (error) {
+    next(error)
+  }
+}
+
 export default {
-  createBookInfo
+  createBookInfo,
+  deleteBookInfo
 }

@@ -5,6 +5,14 @@ async function createBookInfo (bookInfo) {
   return await bookInfoRepository.createBookInfo(bookInfo) 
 }
 
+async function deleteBookInfo (bookId) {
+  const bookInfo = await bookInfoRepository.getBookInfo(bookId)
+  if (!bookInfo) throw new NotFoundException("Book Not Found")
+
+  return await bookInfoRepository.deleteBookInfo(bookId)
+}
+
 export default {
-  createBookInfo
+  createBookInfo,
+  deleteBookInfo
 }
