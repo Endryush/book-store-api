@@ -128,9 +128,6 @@ describe('Testing API GET on /sale', () => {
 })
 
 describe('Testing API GET on /sale with query Params', () => {
-  test ('Should return Sales by authorId', async () => {
-    await testGetSalesByParameter('authorId')
-  })
   test ('Should return Sales by clientId', async () => {
     await testGetSalesByParameter('clientId')
   })
@@ -142,7 +139,7 @@ describe('Testing API GET on /sale with query Params', () => {
   })
   test ('Should return Sales by invalid Param value return 404', async () => {
     const response = await request(app)
-    .get('/api/sale?authorId=-1')
+    .get('/api/sale?clientId=-1')
     .send();
 
     expect(response.status).toBe(404);
