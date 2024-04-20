@@ -30,10 +30,23 @@ async function deleteBookInfo (bookId) {
   return await bookInfoRepository.deleteBookInfo(bookId)
 }
 
+async function createReview (review, bookId) {
+  const bookInfo = await bookInfoRepository.getBookInfo(bookId)
+  if (!bookInfo) throw new NotFoundException('Book with ID informed not found')
+
+  return await bookInfoRepository.createReview(review, bookId)
+}
+
+async function deleteReview (bookId, id) {
+  return await bookInfoRepository.deleteBookInfo(bookId, id)
+}
+
 export default {
   createBookInfo,
   deleteBookInfo,
   getAllBooks,
   updateBookInfo,
-  getBookInfo
+  getBookInfo,
+  createReview,
+  deleteReview
 }

@@ -13,6 +13,13 @@ const validResponse = {
  ...validPayload,
 }
 
+const validReview = {
+  title: "teste",
+  client: "client test",
+  rating: 4,
+  description: "Legal"
+ }
+
 describe('Testing APi POST on /book/info', () => {
   test('Must return error 400 on trying to POST an invalid info', async () => {
     const response = await request(app)
@@ -86,6 +93,25 @@ describe('GET BOOKINFO on book/info', () => {
     expect(response.body.error).toBeTruthy()
   })
 })
+
+describe('Testing API Review on /book/:id/review', () => {
+  test('create a review with invalid params', async () => {
+    const response = await request(app)
+      .post('/api/book/2/review')
+      .send({})
+    
+    expect(response.status).toBe(400)
+    expect(response.body.error).toBeTruthy()
+  })
+  test('create a valid review', async () => {
+    const response = await request(app)
+      .post('/api/book/2/review')
+      .send(validReview)
+    
+    expect(response.status).toBe(201)
+  })
+})
+
 
 describe('Testing API DELETE on /book/info', () => {
   test('Deleting  a non-existing book/info', async () => {
