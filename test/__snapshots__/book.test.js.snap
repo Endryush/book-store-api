@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing API GET on /book Valid book 1`] = `
+{
+  "authorId": 2,
+  "id": 0,
+  "name": "bookNAme",
+  "stock": 12,
+  "value": 40.5,
+}
+`;

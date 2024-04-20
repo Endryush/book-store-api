@@ -112,7 +112,7 @@ describe('Testing API GET on /book', () => {
       .send()
 
     expect(response.status).toBe(200)
-    expect(response.body).toMatchObject(getByIdResponse)
+    expect(response.body).toMatchSnapshot(getByIdResponse)
   })
 
   test('Get All Books', async () => {
@@ -122,6 +122,26 @@ describe('Testing API GET on /book', () => {
 
     expect(response.status).toBe(200)
     expect(Array.isArray(response.body)).toBeTruthy()
+  })
+})
+
+describe('Testing API GET /book?authorId', () => {
+  test('Get by a valid author', async () => {
+    const response = await request(app)
+      .get('/api/book?authorId=2')
+      .send()
+
+    expect(response.status).toBe(200)
+    expect(Array.isArray(response.body)).toBeTruthy()
+  })
+
+  test('GEt by an invalid authorId, must return 404', async () => {
+    const response = await request(app)
+      .get('/api/book?authorId=-1')
+      .send()
+
+    expect(response.status).toBe(404)
+    expect(response.body.error).toBeTruthy()
   })
 })
 

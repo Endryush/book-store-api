@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../src/server'
-const date = new Date().toISOString()
+const date = "2024-04-20T14:50:11.801Z"
 
 const validPayload = {
   date: date,
@@ -114,7 +114,7 @@ describe('Testing API GET on /sale', () => {
       .send()
 
     expect(response.status).toBe(200)
-    expect(response.body).toMatchObject(getByIdResponse)
+    expect(response.body).toMatchSnapshot(getByIdResponse)
   })
 
   test('Get All Sales', async () => {

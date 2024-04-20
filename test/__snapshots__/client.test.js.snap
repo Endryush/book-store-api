@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing API GET on /client Valid client 1`] = `
+{
+  "address": "rua xcv, 0 - lalala",
+  "email": "email@email.com",
+  "id": 0,
+  "name": "clientNAme",
+  "password": "senhaforte",
+  "phone": "454545",
+}
+`;

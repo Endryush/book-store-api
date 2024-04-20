@@ -88,7 +88,7 @@ describe('Testing API GET on /author', () => {
       .send()
 
     expect(response.status).toBe(200)
-    expect(response.body).toMatchObject(getByIdResponse)
+    expect(response.body).toMatchSnapshot(getByIdResponse)
   })
 
   test('Get All Authors', async () => {

@@ -45,7 +45,7 @@ async function getBook (req, res, next) {
 
 async function getAllBooks (req, res, next) {
   try {
-    res.status(200).send(await bookService.getAllBooks())
+    res.status(200).send(await bookService.getAllBooks(req.query.authorId))
     logger.info('GET ALL AUTHORS')
   } catch (error) {
     next(error)

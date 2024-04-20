@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing API GET on /author Valid author 1`] = `
+{
+  "email": "author@email.com",
+  "id": 0,
+  "name": "authorNAme",
+  "phone": "454545",
+}
+`;

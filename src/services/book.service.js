@@ -15,8 +15,17 @@ async function getBookById (id) {
   return await bookRepository.getBookById(id)
 }
 
-async function getAllBooks() {
+async function getAllBooks(authorId) {
+  if (authorId)  return await getBookByAuthorId(authorId)
+
   return await bookRepository.getAllBooks()
+}
+
+async function getBookByAuthorId (authorId) {
+  const booksByAuthor = await bookRepository.getAllBooksByAuthorId(authorId)
+  if(booksByAuthor.length === 0) throw new NotFoundException("No Books found for this Author")
+  
+  return booksByAuthor;
 }
 
 async function deleteBook (id) {

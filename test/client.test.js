@@ -92,7 +92,7 @@ describe('Testing API GET on /client', () => {
       .send()
 
     expect(response.status).toBe(200)
-    expect(response.body).toMatchObject(getByIdResponse)
+    expect(response.body).toMatchSnapshot(getByIdResponse)
   })
 
   test('Get All Clients', async () => {

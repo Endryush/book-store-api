@@ -30,6 +30,17 @@ async function getAllBooks () {
   }
 }
 
+async function getAllBooksByAuthorId (value) {
+  try {
+    return await Book.findAll({
+      where: { authorId: value },
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
 async function getBookById (id) {
   try {
     return await Book.findByPk(id, {
@@ -56,5 +67,6 @@ export default {
   updateBook,
   getBookById,
   getAllBooks,
-  deleteBook
+  deleteBook,
+  getAllBooksByAuthorId
 }
