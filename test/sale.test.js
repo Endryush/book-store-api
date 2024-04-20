@@ -137,6 +137,16 @@ describe('Testing API GET on /sale with query Params', () => {
   test ('Should return Sales by bookId', async () => {
     await testGetSalesByParameter('bookId')
   })
+  test ('Should return Sales by invalid Param and return all results', async () => {
+    await testGetSalesByParameter('d')
+  })
+  test ('Should return Sales by invalid Param value return 404', async () => {
+    const response = await request(app)
+    .get('/api/sale?authorId=-1')
+    .send();
+
+    expect(response.status).toBe(404);
+  })
 })
 
 describe('Testing API DELETE on /sale', () => {

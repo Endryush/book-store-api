@@ -17,9 +17,20 @@ async function getSaleById (id) {
 
 async function getAllSales(params) {
   if (Object.entries(params).length > 0) {
-    const [paramName, paramValue] = Object.entries(params)[0]
-  
-    return await saleRepository.getAllSalesByParams(paramName, paramValue)
+    return await getSalesByParams(params)
+  }
+
+  return await saleRepository.getAllSales(params)
+}
+
+async function getSalesByParams(params) {
+  const [paramName, paramValue] = Object.entries(params)[0]
+
+  if (['authorId', 'bookId', 'clientId'].includes(paramName)) {
+    const sales = await saleRepository.getAllSalesByParams(paramName, paramValue)
+    if (sales.length === 0) throw new NotFoundException(`No sales found with ${paramName}=${paramValue}`);
+
+    return sales
   }
 
   return await saleRepository.getAllSales(params)
