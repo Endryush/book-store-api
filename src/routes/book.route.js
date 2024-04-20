@@ -10,6 +10,7 @@ router
   .put('/', bookController.updateBook)
   .get('/', bookController.getAllBooks)
   .get('/:id', bookController.getBook)
+  .get('/info/all', bookInfoController.getAllBooks)
   .delete('/:id', bookController.deleteBook)
   .delete('/info/:id', bookInfoController.deleteBookInfo)
 

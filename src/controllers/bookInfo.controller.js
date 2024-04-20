@@ -15,6 +15,15 @@ async function createBookInfo (req, res, next) {
  }
 }
 
+async function getAllBooks (req, res, next) {
+try {
+  res.status(200).send(await bookInfoService.getAllBooks())
+  logger.info('GET All BookInfo in /book/info')
+} catch (error) {
+  next(error)
+}
+}
+
 async function deleteBookInfo (req, res, next) {
   try {
     const bookId = parseInt(req.params.id)
@@ -31,5 +40,6 @@ async function deleteBookInfo (req, res, next) {
 
 export default {
   createBookInfo,
-  deleteBookInfo
+  deleteBookInfo,
+  getAllBooks
 }

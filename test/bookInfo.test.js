@@ -28,6 +28,17 @@ describe('Testing APi POST on /book/info', () => {
   })
 })
 
+describe('GET BOOKINFO on book/info', () => {
+  test('GET ALL BOOKINFO on book/info/all', async () => {
+    const response = await request(app)
+      .get('/api/book/info/all')
+      .send()
+
+    expect(response.status).toBe(200)
+    expect(Array.isArray(response.body)).toBeTruthy()
+  })
+})
+
 describe('Testing API DELETE on /book/info', () => {
   test('Deleting  a non-existing book/info', async () => {
     const response = await request(app)
@@ -48,7 +59,7 @@ describe('Testing API DELETE on /book/info', () => {
 
   test('Deleting TEST book on /book/info', async () => {
     const response = await request(app)
-      .delete(`/api/book/info/${validPayload.bookId}`)
+      .delete('/api/book/info/2')
       .send()
 
     expect(response.status).toBe(204)
