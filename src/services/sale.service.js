@@ -15,8 +15,14 @@ async function getSaleById (id) {
   return await saleRepository.getSaleById(id)
 }
 
-async function getAllSales() {
-  return await saleRepository.getAllSales()
+async function getAllSales(params) {
+  if (Object.entries(params).length > 0) {
+    const [paramName, paramValue] = Object.entries(params)[0]
+  
+    return await saleRepository.getAllSalesByParams(paramName, paramValue)
+  }
+
+  return await saleRepository.getAllSales(params)
 }
 
 async function deleteSale (id) {

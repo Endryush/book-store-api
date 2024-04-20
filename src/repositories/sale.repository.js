@@ -30,6 +30,17 @@ async function getAllSales () {
   }
 }
 
+async function getAllSalesByParams (paramName, paramValue) {
+  try {
+    return await Sale.findAll({
+      where: { [paramName]: paramValue },
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
 async function getSaleById (id) {
   try {
     return await Sale.findByPk(id, {
@@ -56,5 +67,6 @@ export default {
   updateSale,
   getSaleById,
   getAllSales,
-  deleteSale
+  deleteSale,
+  getAllSalesByParams
 }

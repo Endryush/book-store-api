@@ -7,7 +7,8 @@ const validPayload = {
   value: 40.5,
   clientId: 2,
   id: 0,
-  bookId: 2
+  bookId: 2,
+  authorId: 2
 }
 
 const getByIdResponse = {
@@ -126,6 +127,18 @@ describe('Testing API GET on /sale', () => {
   })
 })
 
+describe('Testing API GET on /sale with query Params', () => {
+  test ('Should return Sales by authorId', async () => {
+    await testGetSalesByParameter('authorId')
+  })
+  test ('Should return Sales by clientId', async () => {
+    await testGetSalesByParameter('clientId')
+  })
+  test ('Should return Sales by bookId', async () => {
+    await testGetSalesByParameter('bookId')
+  })
+})
+
 describe('Testing API DELETE on /sale', () => {
   test('Deleting  a non-existing sale', async () => {
     const response = await request(app)
@@ -143,3 +156,12 @@ describe('Testing API DELETE on /sale', () => {
    expect(response.status).toBe(204)
   })
 })
+
+async function testGetSalesByParameter (param) {
+  const response = await request(app)
+    .get(`/api/sale?${param}=2`)
+    .send();
+
+  expect(response.status).toBe(200);
+  expect(Array.isArray(response.body)).toBeTruthy();
+}

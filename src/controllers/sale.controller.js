@@ -45,8 +45,8 @@ async function getSale (req, res, next) {
 
 async function getAllSales (req, res, next) {
   try {
-    res.status(200).send(await saleService.getAllSales())
-    logger.info('GET ALL AUTHORS')
+    res.status(200).send(await saleService.getAllSales(req.query))
+    logger.info('GET ALL SALES')
   } catch (error) {
     next(error)
   }
