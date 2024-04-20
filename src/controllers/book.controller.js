@@ -9,7 +9,7 @@ async function createBook (req, res, next) {
     validateBook(book)
     await bookService.createBook(book)
     res.status(201).send()
-    logger.info(`POST IN /AUTHOR ${JSON.stringify(book)}`)
+    logger.info(`POST IN /BOOK ${JSON.stringify(book)}`)
   } catch (error) {
     next(error)
   }
@@ -24,7 +24,7 @@ async function updateBook (req, res, next) {
 
     
     res.status(200).send(await bookService.updateBook(book))
-    logger.info(`PUT IN /AUTHOR ${JSON.stringify(book)}`)
+    logger.info(`PUT IN /BOOK ${JSON.stringify(book)}`)
   } catch (error) {
     next(error)
   }
@@ -37,7 +37,7 @@ async function getBook (req, res, next) {
     if(!book) throw new NotFoundException("Book not found")
 
     res.status(200).send(book)
-    logger.info(`GET IN AUTHOR BY ID: ${id}`)
+    logger.info(`GET IN BOOK BY ID: ${id}`)
   } catch (error) {
     next(error)
   }
@@ -45,8 +45,8 @@ async function getBook (req, res, next) {
 
 async function getAllBooks (req, res, next) {
   try {
-    res.status(200).send(await bookService.getAllBooks(req.query.authorId))
-    logger.info('GET ALL AUTHORS')
+    res.status(200).send(await bookService.getAllBooks(req.query.BOOKId))
+    logger.info('GET ALL BOOKS')
   } catch (error) {
     next(error)
   }
@@ -57,7 +57,7 @@ async function deleteBook (req, res, next) {
     const { id } = req.params
     await bookService.deleteBook(id)
     res.status(204).send()
-    logger.warn(`DELETE IN AUTHOR BY ID: ${id}`)
+    logger.warn(`DELETE IN BOOK BY ID: ${id}`)
   } catch (error) {
     next(error)
   }

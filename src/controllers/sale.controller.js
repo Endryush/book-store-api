@@ -9,7 +9,7 @@ async function createSale (req, res, next) {
     validateSale(sale)
     await saleService.createSale(sale)
     res.status(201).send()
-    logger.info(`POST IN /AUTHOR ${JSON.stringify(sale)}`)
+    logger.info(`POST IN /SALE ${JSON.stringify(sale)}`)
   } catch (error) {
     next(error)
   }
@@ -24,7 +24,7 @@ async function updateSale (req, res, next) {
 
     
     res.status(200).send(await saleService.updateSale(sale))
-    logger.info(`PUT IN /AUTHOR ${JSON.stringify(sale)}`)
+    logger.info(`PUT IN /SALE ${JSON.stringify(sale)}`)
   } catch (error) {
     next(error)
   }
@@ -37,7 +37,7 @@ async function getSale (req, res, next) {
     if(!sale) throw new NotFoundException("Sale not found")
 
     res.status(200).send(sale)
-    logger.info(`GET IN AUTHOR BY ID: ${id}`)
+    logger.info(`GET IN SALE BY ID: ${id}`)
   } catch (error) {
     next(error)
   }
@@ -57,7 +57,7 @@ async function deleteSale (req, res, next) {
     const { id } = req.params
     await saleService.deleteSale(id)
     res.status(204).send()
-    logger.warn(`DELETE IN AUTHOR BY ID: ${id}`)
+    logger.warn(`DELETE IN SALE BY ID: ${id}`)
   } catch (error) {
     next(error)
   }
