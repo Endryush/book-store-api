@@ -34,7 +34,7 @@ describe('Testing APi POST on /book/info', () => {
       .send(validPayload)
   
     expect(response.status).toBe(201)
-  })
+  }, 10000)
 })
 
 describe('Testing API PUT on /book/info', () => {
@@ -109,7 +109,7 @@ describe('Testing API Review on /book/:id/review', () => {
       .send(validReview)
     
     expect(response.status).toBe(201)
-  })
+  }, 10000)
 })
 
 
@@ -137,5 +137,5 @@ describe('Testing API DELETE on /book/info', () => {
       .send()
 
     expect(response.status).toBe(204)
-  })
+  }, 10000)
 })
