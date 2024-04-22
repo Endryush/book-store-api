@@ -28,4 +28,6 @@ jobs:
       env:
         DB_URL: ${{ secrets.DB_URL }}
         DB_MONGO: ${{ secrets.DB_MONGO }}
+        JEST_USR: ${{ secrets.JEST_USR }}
+        JEST_PASS: ${{ secrets.JEST_PASS }}
       run: npm test

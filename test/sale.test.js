@@ -23,6 +23,7 @@ describe('Testing API POST on /sale', () => {
   test('invalid Payload', async () => {
     const response = await request(app)
       .post('/api/sale')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send({})
 
       expect(response.status).toBe(400)
@@ -33,6 +34,7 @@ describe('Testing API POST on /sale', () => {
     delete payload.clientId
     const response = await request(app)
       .post('/api/sale')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(payload)
 
       expect(response.status).toBe(400)
@@ -42,6 +44,7 @@ describe('Testing API POST on /sale', () => {
   test ('validPayload', async () => {
     const response = await request(app)
       .post('/api/sale')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(validPayload)
 
     expect(response.status).toBe(201)
@@ -56,6 +59,7 @@ describe ('Testing  PUT /sale', () => {
     payload.id = '0'
     const response = await request(app)
       .put('/api/sale')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(payload)
 
     expect(response.status).toBe(200)
@@ -68,6 +72,7 @@ describe ('Testing  PUT /sale', () => {
     payload.id = -1
     const response = await request(app)
       .put( '/api/sale')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(payload)
 
     expect(response.status).toBe(404)
@@ -80,6 +85,7 @@ describe ('Testing  PUT /sale', () => {
 
     const response = await request(app)
       .put('/api/sale')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(validPayload)
     
       expect(response.status).toBe(400)
@@ -91,6 +97,7 @@ describe ('Testing  PUT /sale', () => {
     delete payload.clientId
     const response = await request(app)
       .post('/api/sale')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(payload)
 
       expect(response.status).toBe(400)
@@ -102,6 +109,7 @@ describe('Testing API GET on /sale', () => {
   test('Not Found Sale', async () => {
     const response = await request(app)
       .get('/api/sale/-1')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send()
     
     expect(response.status).toBe(404)
@@ -111,6 +119,7 @@ describe('Testing API GET on /sale', () => {
   test('Valid sale', async () => {
     const response = await request(app)
       .get('/api/sale/0')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send()
 
     expect(response.status).toBe(200)
@@ -120,6 +129,7 @@ describe('Testing API GET on /sale', () => {
   test('Get All Sales', async () => {
     const response = await request(app)
       .get('/api/sale')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send()
 
     expect(response.status).toBe(200)
@@ -140,6 +150,7 @@ describe('Testing API GET on /sale with query Params', () => {
   test ('Should return Sales by invalid Param value return 404', async () => {
     const response = await request(app)
     .get('/api/sale?clientId=-1')
+    .auth(process.env.JEST_USR, process.env.JEST_PASS)
     .send();
 
     expect(response.status).toBe(404);
@@ -150,6 +161,7 @@ describe('Testing API DELETE on /sale', () => {
   test('Deleting  a non-existing sale', async () => {
     const response = await request(app)
       .delete('/api/sale/98765')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send()
 
     expect(response.status).toBe(404)
@@ -158,6 +170,7 @@ describe('Testing API DELETE on /sale', () => {
   test('Deleting TEST sale on /sale', async () => {
     const response = await request(app)
     .delete('/api/sale/0')
+    .auth(process.env.JEST_USR, process.env.JEST_PASS)
     .send()
 
    expect(response.status).toBe(204)
@@ -167,6 +180,7 @@ describe('Testing API DELETE on /sale', () => {
 async function testGetSalesByParameter (param) {
   const response = await request(app)
     .get(`/api/sale?${param}=2`)
+    .auth(process.env.JEST_USR, process.env.JEST_PASS)
     .send();
 
   expect(response.status).toBe(200);

@@ -40,6 +40,16 @@ async function getClientById (id) {
   }
 }
 
+async function getClentByEmail (email) {
+  try {
+    return await Client.findOne({
+      where: { email }
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
 async function deleteClient (id) {
   try {
     return await Client.destroy({
@@ -56,5 +66,6 @@ export default {
   updateClient,
   getClientById,
   getAllClients,
-  deleteClient
+  deleteClient,
+  getClentByEmail
 }

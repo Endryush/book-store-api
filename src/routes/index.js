@@ -9,10 +9,10 @@ import basicAuthMiddleware from '../middlewares/basicAuth.js';
 const router = express.Router();
 
 router
-  .use('/health-check', healthCheckRouter)
-  .use('/client', clientRouter)
-  .use('/author', authorRoute)
-  .use('/book', bookRoute)
-  .use('/sale', saleRoute)
+  .use('/health-check', basicAuthMiddleware, healthCheckRouter)
+  .use('/client', basicAuthMiddleware, clientRouter)
+  .use('/author', basicAuthMiddleware, authorRoute)
+  .use('/book', basicAuthMiddleware, bookRoute)
+  .use('/sale', basicAuthMiddleware, saleRoute)
 
 export default router

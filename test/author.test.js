@@ -19,6 +19,7 @@ describe('Testing API POST on /author', () => {
   test('invalid Payload', async () => {
     const response = await request(app)
       .post('/api/author')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send({})
 
       expect(response.status).toBe(400)
@@ -27,6 +28,7 @@ describe('Testing API POST on /author', () => {
   test ('validPayload', async () => {
     const response = await request(app)
       .post('/api/author')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(validPayload)
 
     expect(response.status).toBe(201)
@@ -41,6 +43,7 @@ describe ('Testing  PUT /author', () => {
     payload.id = '0'
     const response = await request(app)
       .put('/api/author')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(payload)
 
     expect(response.status).toBe(200)
@@ -53,6 +56,7 @@ describe ('Testing  PUT /author', () => {
     payload.id = -1
     const response = await request(app)
       .put( '/api/author')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(payload)
 
     expect(response.status).toBe(404)
@@ -65,6 +69,7 @@ describe ('Testing  PUT /author', () => {
 
     const response = await request(app)
       .put('/api/author')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send(validPayload)
     
       expect(response.status).toBe(400)
@@ -76,6 +81,7 @@ describe('Testing API GET on /author', () => {
   test('Not Found Author', async () => {
     const response = await request(app)
       .get('/api/author/-1')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send()
     
     expect(response.status).toBe(404)
@@ -85,6 +91,7 @@ describe('Testing API GET on /author', () => {
   test('Valid author', async () => {
     const response = await request(app)
       .get('/api/author/0')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send()
 
     expect(response.status).toBe(200)
@@ -94,6 +101,7 @@ describe('Testing API GET on /author', () => {
   test('Get All Authors', async () => {
     const response = await request(app)
       .get('/api/author')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send()
 
     expect(response.status).toBe(200)
@@ -105,6 +113,7 @@ describe('Testing API DELETE on /author', () => {
   test('Deleting  a non-existing author', async () => {
     const response = await request(app)
       .delete('/api/author/98765')
+      .auth(process.env.JEST_USR, process.env.JEST_PASS)
       .send()
 
     expect(response.status).toBe(404)
@@ -113,6 +122,7 @@ describe('Testing API DELETE on /author', () => {
   test('Deleting TEST author on /author', async () => {
     const response = await request(app)
     .delete('/api/author/0')
+    .auth(process.env.JEST_USR, process.env.JEST_PASS)
     .send()
 
    expect(response.status).toBe(204)
